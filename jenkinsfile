@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    stages {
+        
+     
+        
+        
+        stage('build docker file localy') {
+            steps {
+                
+                sh """ 
+                   sudo docker build -t test2 .
+                    """
+                    }
+        }
+        
+        
+        
+        
+        
+        stage ("run docker builded"){
+           steps {
+               
+               sh """
+                  sudo  docker run --rm test2 
+                """
+              
+                } 
+            }
+
+ 
+ 
+ 
+        stage ("pull to dockerHub"){
+           steps {
+                sh """ sudo docker login -u mokhtarahmed  """ 
+               
+                
+                sh """sudo docker push test2"""
+                } 
+            }
+         
+        
+        
+        
+    }
+}
